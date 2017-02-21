@@ -5,3 +5,13 @@ Samples/rs/rs-dao/.settings/
 Samples/rs/rs-service/.settings/
 Samples/rs/rs-web/.settings/
 *.class
+Web/rs/rs-service/.settings/
+Web/rs/rs-web/.settings/
+Web/rs/rs-api/.settings/
+Web/rs/.settings/
+Web/Resto-Main/Resto-Service/.settings/
+Web/Resto-Main/Resto-Web/.settings/
+Web/Resto-Main/Resto-DAO/.settings/
+Web/Resto-Main/Resto-API/.settings/
+Web/Resto-Main/.settings/
+Web/Resto-Main/Resto-Common/.settings/
