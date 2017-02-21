@@ -1,0 +1,7 @@
+Samples/rs/.settings/
+Samples/rs/rs-api/.settings/
+Samples/rs/rs-common/.settings/
+Samples/rs/rs-dao/.settings/
+Samples/rs/rs-service/.settings/
+Samples/rs/rs-web/.settings/
+*.class
