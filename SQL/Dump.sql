@@ -32,15 +32,6 @@ CREATE TABLE `catalog` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `catalog`
---
-
-LOCK TABLES `catalog` WRITE;
-/*!40000 ALTER TABLE `catalog` DISABLE KEYS */;
-/*!40000 ALTER TABLE `catalog` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `orderdetails`
 --
 
@@ -52,18 +43,27 @@ CREATE TABLE `orderdetails` (
   `idCatalog` int(11) DEFAULT NULL,
   `Quantity` int(11) DEFAULT NULL,
   `idVendorDetails` int(11) DEFAULT NULL,
+  `idUserDetails` int(11) DEFAULT NULL,
   PRIMARY KEY (`idOrderDetails`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `orderdetails`
+-- Table structure for table `rating`
 --
 
-LOCK TABLES `orderdetails` WRITE;
-/*!40000 ALTER TABLE `orderdetails` DISABLE KEYS */;
-/*!40000 ALTER TABLE `orderdetails` ENABLE KEYS */;
-UNLOCK TABLES;
+DROP TABLE IF EXISTS `rating`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `rating` (
+  `idrating` int(11) NOT NULL,
+  `idUser` int(11) DEFAULT NULL,
+  `rating` int(11) DEFAULT NULL,
+  `idVendorDetails` int(11) DEFAULT NULL,
+  `idCatalog` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idrating`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `registration`
@@ -81,13 +81,23 @@ CREATE TABLE `registration` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `registration`
+-- Table structure for table `userdetails`
 --
 
-LOCK TABLES `registration` WRITE;
-/*!40000 ALTER TABLE `registration` DISABLE KEYS */;
-/*!40000 ALTER TABLE `registration` ENABLE KEYS */;
-UNLOCK TABLES;
+DROP TABLE IF EXISTS `userdetails`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `userdetails` (
+  `iduserdetails` int(11) NOT NULL,
+  `username` varchar(45) DEFAULT NULL,
+  `passcode` varchar(45) DEFAULT NULL,
+  `firstname` varchar(45) DEFAULT NULL,
+  `lastname` varchar(45) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  `phone` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`iduserdetails`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `vendorcatalog`
@@ -103,15 +113,6 @@ CREATE TABLE `vendorcatalog` (
   PRIMARY KEY (`idvendorCatalog`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `vendorcatalog`
---
-
-LOCK TABLES `vendorcatalog` WRITE;
-/*!40000 ALTER TABLE `vendorcatalog` DISABLE KEYS */;
-/*!40000 ALTER TABLE `vendorcatalog` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `vendordetails`
@@ -130,15 +131,6 @@ CREATE TABLE `vendordetails` (
   PRIMARY KEY (`idVendorDetails`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `vendordetails`
---
-
-LOCK TABLES `vendordetails` WRITE;
-/*!40000 ALTER TABLE `vendordetails` DISABLE KEYS */;
-/*!40000 ALTER TABLE `vendordetails` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -149,4 +141,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-02-21  8:36:40
+-- Dump completed on 2017-02-22  6:59:15
