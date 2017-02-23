@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `catalog`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `catalog` (
-  `idcatalog` int(11) NOT NULL,
+  `idcatalog` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
   `price` varchar(45) DEFAULT NULL,
   `details` varchar(200) DEFAULT NULL,
@@ -39,7 +39,7 @@ DROP TABLE IF EXISTS `orderdetails`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `orderdetails` (
-  `idOrderDetails` int(11) NOT NULL,
+  `idOrderDetails` int(11) NOT NULL AUTO_INCREMENT,
   `idCatalog` int(11) DEFAULT NULL,
   `Quantity` int(11) DEFAULT NULL,
   `idVendorDetails` int(11) DEFAULT NULL,
@@ -56,7 +56,7 @@ DROP TABLE IF EXISTS `rating`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `rating` (
-  `idrating` int(11) NOT NULL,
+  `idrating` int(11) NOT NULL AUTO_INCREMENT,
   `idUser` int(11) DEFAULT NULL,
   `rating` int(11) DEFAULT NULL,
   `idVendorDetails` int(11) DEFAULT NULL,
@@ -73,7 +73,7 @@ DROP TABLE IF EXISTS `registration`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `registration` (
-  `idRegistration` int(11) NOT NULL,
+  `idRegistration` int(11) NOT NULL AUTO_INCREMENT,
   `vendorID` int(11) DEFAULT NULL,
   `passCode` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idRegistration`)
@@ -88,7 +88,7 @@ DROP TABLE IF EXISTS `userdetails`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `userdetails` (
-  `iduserdetails` int(11) NOT NULL,
+  `iduserdetails` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(45) DEFAULT NULL,
   `passcode` varchar(45) DEFAULT NULL,
   `firstname` varchar(45) DEFAULT NULL,
@@ -107,7 +107,7 @@ DROP TABLE IF EXISTS `vendorcatalog`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `vendorcatalog` (
-  `idvendorCatalog` int(11) NOT NULL,
+  `idvendorCatalog` int(11) NOT NULL AUTO_INCREMENT,
   `idVendorDetails` int(11) DEFAULT NULL,
   `idCatalog` int(11) DEFAULT NULL,
   PRIMARY KEY (`idvendorCatalog`)
@@ -122,7 +122,7 @@ DROP TABLE IF EXISTS `vendordetails`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `vendordetails` (
-  `idVendorDetails` int(11) NOT NULL,
+  `idVendorDetails` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(45) DEFAULT NULL,
   `Email` varchar(45) DEFAULT NULL,
   `Phone` varchar(45) DEFAULT NULL,
@@ -141,4 +141,4 @@ CREATE TABLE `vendordetails` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-02-22  6:59:15
+-- Dump completed on 2017-02-22  7:11:18
