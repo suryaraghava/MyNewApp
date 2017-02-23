@@ -8,14 +8,15 @@
     tools:context=".gui.HomeActivity" >
 
     <TextView
-        android:id="@+id/providerDetails"
+        android:id="@+id/restTv"
         style="@style/headerTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Hello"/>
+        />
 
     <Button
+        android:id="@+id/exploreBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"

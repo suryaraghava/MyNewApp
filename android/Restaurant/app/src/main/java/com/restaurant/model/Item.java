@@ -3,7 +3,7 @@ package com.restaurant.model;
 /**
  * Created by Munisekhar on 2/23/2017.
  */
-public class Items {
+public class Item {
     private int id;
     private String name;
     private String image;

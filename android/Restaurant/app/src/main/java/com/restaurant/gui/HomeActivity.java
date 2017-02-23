@@ -43,7 +43,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        loadFragment(FragmentEnum.RESTAURANTDETAILSFRGMENT,null);
+        loadFragment(FragmentEnum.SCANFRAGMENT,null);
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -53,6 +53,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     public boolean onTouch(View v, MotionEvent event) {
 
         return false;
+    }
+
+    @Override
+    public void onExpolreClick() {
+        loadFragment(FragmentEnum.ITEMSFRAGMENT,null);
     }
 
     @Override
@@ -85,6 +90,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             fragment = new ScanFragment();
         } else if(selFrg == FragmentEnum.RESTAURANTDETAILSFRGMENT) {
             fragment = new RestaurantDetailsFragment();
+        } else if(selFrg == FragmentEnum.ITEMSFRAGMENT) {
+            fragment = new ItemsFragment();
         }
         if(params != null) {
             Bundle bundle = new Bundle();

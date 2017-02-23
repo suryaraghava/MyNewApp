@@ -6,5 +6,6 @@ package com.restaurant.model;
 public enum  FragmentEnum {
 
     SCANFRAGMENT,
-    RESTAURANTDETAILSFRGMENT;
+    RESTAURANTDETAILSFRGMENT,
+    ITEMSFRAGMENT;
 }
