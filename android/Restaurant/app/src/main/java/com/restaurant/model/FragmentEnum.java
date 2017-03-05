@@ -7,5 +7,6 @@ public enum  FragmentEnum {
 
     SCANFRAGMENT,
     RESTAURANTDETAILSFRGMENT,
+    MYORDERS,
     ITEMSFRAGMENT;
 }

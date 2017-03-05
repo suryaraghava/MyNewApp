@@ -15,12 +15,14 @@ public class AppContext {
     private static Map<String,Restaurant> restaurants;
     private static Map<String,Map<String,List<Item>>> items;
     private static List<Item> plateItems;
+    private static List<Item> myOrders;
 
 
     private AppContext() {
         restaurants = new HashMap<>();
         items = new HashMap<>();
         plateItems = new ArrayList<>();
+        myOrders = new ArrayList<>();
     }
 
     public static AppContext getInstance() {
@@ -61,6 +63,14 @@ public class AppContext {
 
     public void setPlateItems(List<Item> plateItems) {
         AppContext.plateItems = plateItems;
+    }
+
+    public List<Item> getMyOrders() {
+        return myOrders;
+    }
+
+    public void setMyOrders(List<Item> myOrders) {
+        AppContext.myOrders = myOrders;
     }
 
     public static void createDummyData() {

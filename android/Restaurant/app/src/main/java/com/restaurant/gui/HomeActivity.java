@@ -68,6 +68,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 case R.id.cartFV :
                         Utils.showToast(this,"Cart clicked");
                         Utils.startIntent(HomeActivity.this,CheckOutActivity.class);
+                        loadFragment(FragmentEnum.SCANFRAGMENT,null);
+
                     break;
             }
         }
@@ -108,9 +110,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if(id == R.id.nav_camera) {
+
+        if(id == R.id.scanOpt) {
             loadFragment(FragmentEnum.SCANFRAGMENT, null);
+        } else if(id == R.id.myOrdersOpt) {
+            loadFragment(FragmentEnum.MYORDERS, null);
         }
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -118,6 +124,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     private void loadFragment(FragmentEnum selFrg, Map<String,String> params) {
         Fragment fragment = null;
+
+        cartCountTv.setText(""+AppContext.getInstance().getPlateItems().size());
 
         if (selFrg == FragmentEnum.SCANFRAGMENT) {
             fragment = new ScanFragment();
@@ -129,6 +137,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             ItemsFragment itemsFragment = new ItemsFragment();
             itemsFragment.setmListener(this);
             fragment = itemsFragment;
+        } else if(selFrg == FragmentEnum.MYORDERS) {
+            fragment = new MyOrdersFragment();
         }
         if(params != null) {
             Bundle bundle = new Bundle();

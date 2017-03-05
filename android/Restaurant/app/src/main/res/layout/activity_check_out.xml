@@ -36,7 +36,6 @@
         <TextView
             style="@style/item_style"
             android:textStyle="bold"
-            android:gravity="left|center_vertical"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
@@ -46,7 +45,6 @@
             android:id="@+id/totalPriceTv"
             style="@style/item_style"
             android:textStyle="bold"
-            android:gravity="right|center_vertical"
             android:layout_width="0dp"
             android:layout_weight="0.6"
             android:layout_height="match_parent"

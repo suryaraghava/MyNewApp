@@ -8,32 +8,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.restaurant.R;
-import com.restaurant.listener.ItemListener;
 import com.restaurant.model.AppContext;
 import com.restaurant.model.Item;
-
-import java.util.List;
 
 /**
  * Created by Munisekhar on 1/25/2017.
  */
-public class CheckOutAdapter extends BaseAdapter{
+public class MyOrdersAdapter extends BaseAdapter{
     private Context mContext;
-    private CheckOutListener mListener;
-    public CheckOutAdapter(Context mContext,CheckOutListener mListener) {
+    public MyOrdersAdapter(Context mContext) {
         this.mContext = mContext;
-        this.mListener = mListener;
     }
 
     @Override
     public int getCount() {
-        return AppContext.getInstance().getPlateItems().size();
+        return AppContext.getInstance().getMyOrders().size();
     }
 
     @Override
@@ -53,9 +46,9 @@ public class CheckOutAdapter extends BaseAdapter{
         TextView nameTv,offerPriceTv,mrpPriceTv,countTv,itemTotalTv,descTv;
         Button removeBtn,increaseBtn,decreaseBtn;
         if(convertView == null) {
-            convertView = inflater.inflate(R.layout.check_out_row, null);
+            convertView = inflater.inflate(R.layout.my_order_row, null);
         }
-        Item item = AppContext.getInstance().getPlateItems().get(position);
+        Item item = AppContext.getInstance().getMyOrders().get(position);
 
         image = (ImageView) convertView.findViewById(R.id.itemImg);
         nameTv = (TextView) convertView.findViewById(R.id.itemNameTv);
@@ -79,42 +72,8 @@ public class CheckOutAdapter extends BaseAdapter{
         increaseBtn.setTag(position);
         decreaseBtn.setTag(position);
 
-        removeBtn.setOnTouchListener(onTouchListener);
-        increaseBtn.setOnTouchListener(onTouchListener);
-        decreaseBtn.setOnTouchListener(onTouchListener);
 
         return  convertView;
-    }
-
-    View.OnTouchListener onTouchListener = new View.OnTouchListener() {
-        @Override
-        public boolean onTouch(View v, MotionEvent event) {
-            if(event.getAction() == MotionEvent.ACTION_DOWN) {
-                int position = (Integer) v.getTag();
-                Item item = AppContext.getInstance().getPlateItems().get(position);
-                switch (v.getId()) {
-                    case R.id.removeBtn:
-                        AppContext.getInstance().getPlateItems().remove(item);
-                        break;
-                    case R.id.increaseBtn:
-                           AppContext.getInstance().getPlateItems().get(position).setCount(item.getCount()+1);
-                        break;
-                    case R.id.decreaseBtn:
-                        if(item.getCount() <= 0) {
-                            return false;
-                        }
-                        AppContext.getInstance().getPlateItems().get(position).setCount(item.getCount()-1);
-                        break;
-                }
-                mListener.onItemChnage();
-                notifyDataSetChanged();
-            }
-            return false;
-        }
-    };
-
-    public interface  CheckOutListener {
-        void onItemChnage();
     }
 
 
