@@ -18,6 +18,7 @@
     <dimen name="dp_130">130dp</dimen>
 
 
+    <dimen name="sp_6">6sp</dimen>
     <dimen name="sp_8">8sp</dimen>
     <dimen name="sp_10">10sp</dimen>
     <dimen name="sp_15">15sp</dimen>

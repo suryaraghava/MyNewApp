@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:background="@color/app_color"
+    android:gravity="center_vertical"
+    android:layout_height="60dp">
+
+    <TextView
+        android:id="@+id/backBtn"
+        android:layout_width="40dp"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_height="35dp"
+        android:background="@mipmap/back_button"/>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"/>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/dp_5"
+        android:layout_gravity="right|center_vertical">
+
+        <com.restaurant.gui.view.CircularImageView
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:src="@mipmap/cart"
+            />
+
+        <TextView
+            android:id="@+id/cartCountTv"
+            android:layout_marginRight="@dimen/dp_5"
+            android:layout_width="@dimen/dp_15"
+            android:layout_height="@dimen/dp_15"
+            android:background="@drawable/rounded_corners"
+            android:layout_gravity="right"
+            android:gravity="center"
+            android:textSize="@dimen/sp_8"
+            android:text="0"/>
+
+    </FrameLayout>
+
+
+</LinearLayout>

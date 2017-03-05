@@ -1,4 +1,4 @@
-package com.restaurant.adapter;
+package com.restaurant.gui.adapter;
 
 import android.content.Context;
 import android.graphics.Paint;
@@ -7,11 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.restaurant.R;
+import com.restaurant.listener.ItemListener;
 import com.restaurant.model.Item;
+import com.restaurant.util.Utils;
 
 import java.util.List;
 
@@ -21,10 +24,11 @@ import java.util.List;
 public class SettingsAdapter extends BaseAdapter{
     List<Item> list;
     private Context mContext;
-
-    public SettingsAdapter(List<Item> list, Context mContext) {
+    private ItemListener itemListener;
+    public SettingsAdapter(List<Item> list, Context mContext, ItemListener itemListener) {
         this.list = list;
         this.mContext = mContext;
+        this.itemListener = itemListener;
     }
 
     @Override
@@ -54,6 +58,20 @@ public class SettingsAdapter extends BaseAdapter{
         nameTv = (TextView) convertView.findViewById(R.id.itemNameTv);
         offerPriceTv = (TextView) convertView.findViewById(R.id.offerPriceTv);
         mrpPriceTv = (TextView) convertView.findViewById(R.id.mrpPriceTv);
+        itemSelectCb = (CheckBox) convertView.findViewById(R.id.itemSelectCb);
+        itemSelectCb.setTag(position);
+        itemSelectCb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                int position = (Integer) buttonView.getTag();
+                if(isChecked) {
+                   itemListener.addItemToPlate(list.get(position));
+                } else {
+                   itemListener.removeItemFromPlate(list.get(position));
+                }
+
+            }
+        });
 
         nameTv.setText(list.get(position).getName());
         offerPriceTv.setText(list.get(position).getOfferPrice()+"");
@@ -69,4 +87,5 @@ public class SettingsAdapter extends BaseAdapter{
     public void setList(List<Item> list) {
         this.list = list;
     }
+
 }

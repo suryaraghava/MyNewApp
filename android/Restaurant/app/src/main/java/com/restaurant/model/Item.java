@@ -9,6 +9,7 @@ public class Item {
     private String image;
     private double mrpPrice;
     private double offerPrice;
+    private int count;
 
     public int getId() {
         return id;
@@ -48,5 +49,13 @@ public class Item {
 
     public void setOfferPrice(double offerPrice) {
         this.offerPrice = offerPrice;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 }

@@ -7,20 +7,18 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.restaurant.R;
-import com.restaurant.adapter.SettingsAdapter;
-import com.restaurant.listener.RestaurantDetailsListener;
+import com.restaurant.gui.adapter.SettingsAdapter;
+import com.restaurant.listener.ItemListener;
 import com.restaurant.model.AppContext;
 import com.restaurant.model.Item;
-import com.restaurant.model.Restaurant;
-import com.restaurant.util.Utils;
 
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -37,7 +35,20 @@ public class ItemsFragment extends Fragment implements View.OnTouchListener {
     ListView startersLv,mainCourseLv;
     SettingsAdapter startersAdapter,mainCourseAdapter;
     List<Item> startersList,mainCourseList;
+    private ItemListener mListener;
+    private LinearLayout itemsLv;
+    private TextView noItemsTv;
+
     public ItemsFragment() {
+    }
+
+
+    public ItemListener getmListener() {
+        return mListener;
+    }
+
+    public void setmListener(ItemListener mListener) {
+        this.mListener = mListener;
     }
 
     @Override
@@ -58,33 +69,40 @@ public class ItemsFragment extends Fragment implements View.OnTouchListener {
         View v = inflater.inflate(R.layout.fragment_items, container, false);
         mainCourseLv = (ListView) v.findViewById(R.id.mainCourseLv);
         startersLv = (ListView) v.findViewById(R.id.startersLv);
-        startersList = AppContext.getInstance().getItems().get(AppContext.getInstance().getSelectedQRCode()).get("Starters");
-        mainCourseList = AppContext.getInstance().getItems().get(AppContext.getInstance().getSelectedQRCode()).get("Main Course");
-        startersAdapter = new SettingsAdapter(startersList,getActivity());
-        startersLv.setAdapter(startersAdapter);
-        mainCourseAdapter = new SettingsAdapter(mainCourseList,getActivity());
-        mainCourseLv.setAdapter(mainCourseAdapter);
+        itemsLv = (LinearLayout) v.findViewById(R.id.itemsLv);
+        noItemsTv = (TextView) v.findViewById(R.id.noItemsTv);
+        Map<String, List<Item>> restaurentItems = AppContext.getInstance().getItems().get(AppContext.getInstance().getSelectedQRCode());
+        if(restaurentItems != null) {
+            startersList = AppContext.getInstance().getItems().get(AppContext.getInstance().getSelectedQRCode()).get("Starters");
+            mainCourseList = AppContext.getInstance().getItems().get(AppContext.getInstance().getSelectedQRCode()).get("Main Course");
+            noItemsTv.setVisibility(View.GONE);
+            startersAdapter = new SettingsAdapter(startersList,getActivity(),mListener);
+            startersLv.setAdapter(startersAdapter);
+            mainCourseAdapter = new SettingsAdapter(mainCourseList,getActivity(),mListener);
+            mainCourseLv.setAdapter(mainCourseAdapter);
+        } else {
+            noItemsTv.setVisibility(View.VISIBLE);
+            itemsLv.setVisibility(View.GONE);
+        }
 
-        //Utils.showToast(getActivity(),"starters"+startersList.size()+" Main course"+mainCourseList.size());
-        //Utils.showToast(getContext(),"QR Code"+ AppContext.getInstance().getSelectedQRCode());
         return v;
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-       /* if (context instanceof RestaurantDetailsListener) {
-           // mListener = (RestaurantDetailsListener) context;
+        if (context instanceof ItemListener) {
+           // mListener = (ItemListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement ScanListener");
-        }*/
+        }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        //mListener = null;
+        mListener = null;
     }
 
 }

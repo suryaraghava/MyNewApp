@@ -9,13 +9,18 @@ import java.util.Map;
  * Created by Munisekhar on 2/23/2017.
  */
 public class AppContext {
+
     private static AppContext context;
     private String selectedQRCode;
     private static Map<String,Restaurant> restaurants;
     private static Map<String,Map<String,List<Item>>> items;
+    private static List<Item> plateItems;
+
+
     private AppContext() {
         restaurants = new HashMap<>();
         items = new HashMap<>();
+        plateItems = new ArrayList<>();
     }
 
     public static AppContext getInstance() {
@@ -50,6 +55,14 @@ public class AppContext {
         this.items = items;
     }
 
+    public List<Item> getPlateItems() {
+        return plateItems;
+    }
+
+    public void setPlateItems(List<Item> plateItems) {
+        AppContext.plateItems = plateItems;
+    }
+
     public static void createDummyData() {
      Restaurant restaurant = new Restaurant("Muni","Muni Restaurant");
         restaurants.put("Muni",restaurant);
@@ -72,21 +85,21 @@ public class AppContext {
         itemsList.add(item);
 
         item = new Item();
-        item.setId(1);
+        item.setId(2);
         item.setName("Chicken Tikka");
         item.setMrpPrice(200);
         item.setOfferPrice(180);
         itemsList.add(item);
 
         item = new Item();
-        item.setId(1);
+        item.setId(3);
         item.setName("Chicken Soup");
         item.setMrpPrice(130);
         item.setOfferPrice(110);
         itemsList.add(item);
 
         item = new Item();
-        item.setId(1);
+        item.setId(4);
         item.setName("Chicken Lollipop");
         item.setMrpPrice(170);
         item.setOfferPrice(120);
@@ -96,14 +109,14 @@ public class AppContext {
 
        itemsList = new ArrayList<>();
         item = new Item();
-        item.setId(1);
+        item.setId(5);
         item.setName("Veg Birayni");
         item.setMrpPrice(180);
         item.setOfferPrice(110);
         itemsList.add(item);
 
         item = new Item();
-        item.setId(1);
+        item.setId(6);
         item.setName("Chicken Biryani");
         item.setMrpPrice(190);
         item.setOfferPrice(130);
@@ -115,28 +128,28 @@ public class AppContext {
         itemTypes = new HashMap<>();
         itemsList = new ArrayList<>();
         item = new Item();
-        item.setId(1);
+        item.setId(7);
         item.setName("Chilli Chicken");
         item.setMrpPrice(90);
         item.setOfferPrice(90);
         itemsList.add(item);
 
         item = new Item();
-        item.setId(1);
+        item.setId(8);
         item.setName("Chicken Tikka");
         item.setMrpPrice(150);
         item.setOfferPrice(130);
         itemsList.add(item);
 
         item = new Item();
-        item.setId(1);
+        item.setId(9);
         item.setName("Chicken Soup");
         item.setMrpPrice(150);
         item.setOfferPrice(110);
         itemsList.add(item);
 
         item = new Item();
-        item.setId(1);
+        item.setId(10);
         item.setName("Chicken Lollipop");
         item.setMrpPrice(140);
         item.setOfferPrice(120);
@@ -146,14 +159,14 @@ public class AppContext {
 
         itemsList = new ArrayList<>();
         item = new Item();
-        item.setId(1);
+        item.setId(11);
         item.setName("Veg Birayni");
         item.setMrpPrice(177);
         item.setOfferPrice(110);
         itemsList.add(item);
 
         item = new Item();
-        item.setId(1);
+        item.setId(12);
         item.setName("Chicken Biryani");
         item.setMrpPrice(160);
         item.setOfferPrice(130);

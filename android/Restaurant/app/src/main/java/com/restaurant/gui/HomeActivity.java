@@ -13,25 +13,37 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+import com.journeyapps.barcodescanner.Util;
 import com.restaurant.R;
+import com.restaurant.listener.ItemListener;
 import com.restaurant.listener.RestaurantDetailsListener;
 import com.restaurant.listener.ScanListener;
 import com.restaurant.model.AppContext;
 import com.restaurant.model.FragmentEnum;
+import com.restaurant.model.Item;
 import com.restaurant.util.Utils;
 
 import java.util.Map;
 
-public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,View.OnTouchListener,ScanListener,RestaurantDetailsListener {
+public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,View.OnTouchListener,ScanListener,RestaurantDetailsListener,ItemListener {
     private static String TAG = HomeActivity.class.getSimpleName();
+
+    private TextView cartCountTv;
+    private FrameLayout cartFV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        cartCountTv = (TextView) findViewById(R.id.cartCountTv);
+        cartFV = (FrameLayout) findViewById(R.id.cartFV);
+        cartFV.setOnTouchListener(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -51,7 +63,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-
+        if(event.getAction() == MotionEvent.ACTION_DOWN) {
+            switch (v.getId()) {
+                case R.id.cartFV :
+                        Utils.showToast(this,"Cart clicked");
+                        Utils.startIntent(HomeActivity.this,CheckOutActivity.class);
+                    break;
+            }
+        }
         return false;
     }
 
@@ -70,6 +89,20 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+    @Override
+    public void addItemToPlate(Item item) {
+        item.setCount(1);
+        AppContext.getInstance().getPlateItems().add(item);
+        cartCountTv.setText(""+AppContext.getInstance().getPlateItems().size());
+        Utils.showToast(this,"Item added "+item.getId());
+    }
+
+    @Override
+    public void removeItemFromPlate(Item item) {
+        AppContext.getInstance().getPlateItems().remove(item);
+        cartCountTv.setText(""+AppContext.getInstance().getPlateItems().size());
+        Utils.showToast(this,"Item Removed"+item.getId());
+    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -91,7 +124,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         } else if(selFrg == FragmentEnum.RESTAURANTDETAILSFRGMENT) {
             fragment = new RestaurantDetailsFragment();
         } else if(selFrg == FragmentEnum.ITEMSFRAGMENT) {
-            fragment = new ItemsFragment();
+            AppContext.getInstance().getPlateItems().clear();
+            cartCountTv.setText("0");
+            ItemsFragment itemsFragment = new ItemsFragment();
+            itemsFragment.setmListener(this);
+            fragment = itemsFragment;
         }
         if(params != null) {
             Bundle bundle = new Bundle();
