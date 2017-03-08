@@ -26,6 +26,7 @@ import com.restaurant.listener.ScanListener;
 import com.restaurant.model.AppContext;
 import com.restaurant.model.FragmentEnum;
 import com.restaurant.model.Item;
+import com.restaurant.util.Constants;
 import com.restaurant.util.Utils;
 
 import java.util.Map;
@@ -33,7 +34,7 @@ import java.util.Map;
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,View.OnTouchListener,ScanListener,RestaurantDetailsListener,ItemListener {
     private static String TAG = HomeActivity.class.getSimpleName();
 
-    private TextView cartCountTv;
+    private TextView cartCountTv,nameTv;
     private FrameLayout cartFV;
 
     @Override
@@ -58,7 +59,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         loadFragment(FragmentEnum.SCANFRAGMENT,null);
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+
+        View header=navigationView.getHeaderView(0);
+        nameTv = (TextView) header.findViewById(R.id.nameTv);
         navigationView.setNavigationItemSelectedListener(this);
+        nameTv.setText(Utils.getString(this, Constants.LOGIN_NAME_KEY));
     }
 
     @Override
