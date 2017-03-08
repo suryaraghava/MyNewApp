@@ -6,7 +6,7 @@
     <string name="action_settings">Settings</string>
     <string name="url">http://localhost:8080</string>
     <string name="context_path">/restaurant</string>
-    <string name="scan">Scan</string>
+    <string name="scan">Capture QR</string>
     <string name="explore">Explore</string>
 
 
