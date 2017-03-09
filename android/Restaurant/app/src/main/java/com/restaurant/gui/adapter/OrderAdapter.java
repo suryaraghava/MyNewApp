@@ -23,10 +23,10 @@ import java.util.List;
 /**
  * Created by Munisekhar on 1/25/2017.
  */
-public class CheckOutAdapter extends BaseAdapter{
+public class OrderAdapter extends BaseAdapter{
     private Context mContext;
     private CheckOutListener mListener;
-    public CheckOutAdapter(Context mContext,CheckOutListener mListener) {
+    public OrderAdapter(Context mContext, CheckOutListener mListener) {
         this.mContext = mContext;
         this.mListener = mListener;
     }
@@ -95,6 +95,7 @@ public class CheckOutAdapter extends BaseAdapter{
                 switch (v.getId()) {
                     case R.id.removeBtn:
                         AppContext.getInstance().getPlateItems().remove(item);
+
                         break;
                     case R.id.increaseBtn:
                            AppContext.getInstance().getPlateItems().get(position).setCount(item.getCount()+1);

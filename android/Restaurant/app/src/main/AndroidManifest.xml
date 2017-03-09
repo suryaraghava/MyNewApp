@@ -20,9 +20,6 @@
 
         </activity>
         <activity
-            android:name=".gui.CheckOutActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".gui.LoginActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">

@@ -6,7 +6,7 @@
     android:orientation="vertical"
     tools:context="com.restaurant.gui.CheckOutActivity">
 
-    <include layout="@layout/header"/>
+    <!--<include layout="@layout/header"/>-->
 
     <FrameLayout
         android:layout_width="match_parent"

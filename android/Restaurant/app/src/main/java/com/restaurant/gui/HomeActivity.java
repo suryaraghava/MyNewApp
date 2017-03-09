@@ -18,10 +18,9 @@ import android.widget.TextView;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
-import com.journeyapps.barcodescanner.Util;
 import com.restaurant.R;
 import com.restaurant.listener.ItemListener;
-import com.restaurant.listener.RestaurantDetailsListener;
+import com.restaurant.listener.OrderListener;
 import com.restaurant.listener.ScanListener;
 import com.restaurant.model.AppContext;
 import com.restaurant.model.FragmentEnum;
@@ -31,7 +30,7 @@ import com.restaurant.util.Utils;
 
 import java.util.Map;
 
-public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,View.OnTouchListener,ScanListener,RestaurantDetailsListener,ItemListener {
+public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,View.OnTouchListener,ScanListener,ItemListener,OrderListener {
     private static String TAG = HomeActivity.class.getSimpleName();
 
     private TextView cartCountTv,nameTv;
@@ -72,8 +71,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             switch (v.getId()) {
                 case R.id.cartFV :
                         Utils.showToast(this,"Cart clicked");
-                        Utils.startIntent(HomeActivity.this,CheckOutActivity.class);
-                        loadFragment(FragmentEnum.SCANFRAGMENT,null);
+                       // Utils.startIntent(HomeActivity.this,CheckOutActivity.class);
+                        loadFragment(FragmentEnum.ORDER,null);
 
                     break;
             }
@@ -82,8 +81,24 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public void onExpolreClick() {
-        loadFragment(FragmentEnum.ITEMSFRAGMENT,null);
+    public void onCartChange() {
+        cartCountTv.setText(""+AppContext.getInstance().getPlateItems().size());
+    }
+
+    @Override
+    public void onOrderClick() {
+        Utils.showToast(this,"Your order has been placed successfully.");
+        loadFragment(FragmentEnum.SCANFRAGMENT,null);
+    }
+
+    @Override
+    public void onMoreClick() {
+
+    }
+
+    @Override
+    public void onFinishOrder() {
+
     }
 
     @Override
@@ -134,8 +149,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         if (selFrg == FragmentEnum.SCANFRAGMENT) {
             fragment = new ScanFragment();
-        } else if(selFrg == FragmentEnum.RESTAURANTDETAILSFRGMENT) {
-            fragment = new RestaurantDetailsFragment();
         } else if(selFrg == FragmentEnum.ITEMSFRAGMENT) {
             AppContext.getInstance().getPlateItems().clear();
             cartCountTv.setText("0");
@@ -144,6 +157,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             fragment = itemsFragment;
         } else if(selFrg == FragmentEnum.MYORDERS) {
             fragment = new MyOrdersFragment();
+        } else if(selFrg == FragmentEnum.ORDER) {
+            OrderFragment orderFragment = new OrderFragment();
+            orderFragment.setmListener(this);
+            fragment = orderFragment;
         }
         if(params != null) {
             Bundle bundle = new Bundle();
@@ -162,7 +179,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     android.os.Handler qrCodeHandler = new android.os.Handler(){
         @Override
         public void handleMessage(Message msg){
-            loadFragment(FragmentEnum.RESTAURANTDETAILSFRGMENT, null);
+            if(AppContext.getInstance().getRestaurants().containsKey(AppContext.getInstance().getSelectedQRCode())) {
+                loadFragment(FragmentEnum.ITEMSFRAGMENT, null);
+            } else {
+                Utils.showToast(HomeActivity.this,"No Restaurants found with this QR code.");
+            }
         }
     };
 
